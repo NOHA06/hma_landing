@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>HMA - Hôpital Militaire d'Abidjan</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&display=swap');
+        body { font-family: 'Inter', sans-serif; }
+        .hero-gradient { background: linear-gradient(135deg, #0f4c81 0%, #2a9d8f 100%); }
+    </style>
+</head>
+<body class="bg-gray-50 text-gray-800">
+
+    <nav class="bg-white shadow-md sticky top-0 z-50">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between h-20 items-center">
+                <div class="flex-shrink-0 flex items-center">
+                    <span class="text-2xl font-bold text-blue-900">H.M.A<span class="text-teal-500"></span></span>
+                </div>
+                <div class="hidden md:flex space-x-8 font-medium">
+                    <a href="#accueil" class="hover:text-teal-600 transition">Accueil</a>
+                    <a href="#services" class="hover:text-teal-600 transition">Services</a>
+                    <a href="#apropos" class="hover:text-teal-600 transition">À Propos</a>
+                    <a href="#contact" class="bg-teal-500 text-white px-5 py-2 rounded-full hover:bg-teal-600 transition">Urgence 24h/7</a>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <header id="accueil" class="hero-gradient text-white py-20 px-4">
+        <div class="max-w-7xl mx-auto flex flex-col md:flex-row items-center">
+            <div class="md:w-1/2 mb-10 md:mb-0">
+                <h1 class="text-4xl md:text-6xl font-bold mb-6 leading-tight">
+                    Votre santé, notre priorité .
+                </h1>
+                <p class="text-lg mb-8 opacity-90">
+                    L'Hôpital Militaire d'Abidjan met à votre disposition une expertise médicale de pointe et un accueil chaleureux pour toute la famille.
+                </p>
+                <div class="flex space-x-4">
+                    <button onclick="scrollToSection('contact')" class="bg-white text-blue-900 px-8 py-3 rounded-lg font-semibold hover:bg-gray-100 transition">Prendre RDV</button>
+                    <button class="border border-white px-8 py-3 rounded-lg font-semibold hover:bg-white hover:text-blue-900 transition">Nos Services</button>
+                </div>
+            </div>
+            <div class="md:w-1/2">
+                <img src="./couloir.JPG" alt="Hôpital" class="rounded-2xl shadow-2xl">
+            </div>
+        </div>
+    </header>
+
+    <section class="max-w-7xl mx-auto -mt-12 px-4">
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+            <div class="bg-white p-6 rounded-xl shadow-lg flex items-center space-x-4">
+                <div class="bg-blue-100 p-4 rounded-full text-blue-600"><i class="fas fa-user-md text-2xl"></i></div>
+                <div><h3 class="font-bold text-xl">Experts</h3><p class="text-sm text-gray-500">Spécialistes qualifiés</p></div>
+            </div>
+            <div class="bg-white p-6 rounded-xl shadow-lg flex items-center space-x-4">
+                <div class="bg-teal-100 p-4 rounded-full text-teal-600"><i class="fas fa-clock text-2xl"></i></div>
+                <div><h3 class="font-bold text-xl">24h/7j</h3><p class="text-sm text-gray-500">Urgences disponibles</p></div>
+            </div>
+            <div class="bg-white p-6 rounded-xl shadow-lg flex items-center space-x-4">
+                <div class="bg-red-100 p-4 rounded-full text-red-600"><i class="fas fa-ambulance text-2xl"></i></div>
+                <div><h3 class="font-bold text-xl">Ambulance</h3><p class="text-sm text-gray-500">Service rapide</p></div>
+            </div>
+        </div>
+    </section>
+
+    <section id="services" class="py-20 max-w-7xl mx-auto px-4">
+        <div class="text-center mb-16">
+            <h2 class="text-3xl font-bold text-blue-900 mb-4">Nos Spécialités</h2>
+            <p class="text-gray-600 max-w-2xl mx-auto">Nous offrons une gamme complète de soins médicaux pour répondre à tous vos besoins de santé.</p>
+        </div>
+        <div class="grid grid-cols-1 md:grid-cols-4 gap-8">
+            <div class="bg-white p-8 rounded-xl border border-gray-100 hover:shadow-xl transition text-center">
+                <i class="fas fa-heartbeat text-4xl text-teal-500 mb-4"></i>
+                <h4 class="font-bold mb-2">Cardiologie</h4>
+                <p class="text-sm text-gray-500">Soins complets pour votre cœur.</p>
+            </div>
+            <div class="bg-white p-8 rounded-xl border border-gray-100 hover:shadow-xl transition text-center">
+                <i class="fas fa-baby text-4xl text-teal-500 mb-4"></i>
+                <h4 class="font-bold mb-2">Pédiatrie</h4>
+                <p class="text-sm text-gray-500">La santé de vos enfants.</p>
+            </div>
+            <div class="bg-white p-8 rounded-xl border border-gray-100 hover:shadow-xl transition text-center">
+                <i class="fas fa-microscope text-4xl text-teal-500 mb-4"></i>
+                <h4 class="font-bold mb-2">Laboratoire</h4>
+                <p class="text-sm text-gray-500">Analyses rapides et précises.</p>
+            </div>
+            <div class="bg-white p-8 rounded-xl border border-gray-100 hover:shadow-xl transition text-center">
+                <i class="fas fa-tooth text-4xl text-teal-500 mb-4"></i>
+                <h4 class="font-bold mb-2">Dentisterie</h4>
+                <p class="text-sm text-gray-500">Sourire éclatant et sain.</p>
+            </div>
+        </div>
+    </section>
+
+    <section id="contact" class="py-20 bg-gray-100">
+        <div class="max-w-7xl mx-auto px-4 grid grid-cols-1 md:grid-cols-2 gap-12">
+            <div>
+                <h2 class="text-3xl font-bold text-blue-900 mb-6">Contactez-nous</h2>
+                <p class="mb-8 text-gray-600">Situé au cœur d'Abidjan, l'Hôpital Militaire d'Abidjan est accessible facilement pour tous vos besoins médicaux.</p>
+                <div class="space-y-4">
+                    <div class="flex items-center space-x-4">
+                        <i class="fas fa-map-marker-alt text-teal-500"></i>
+                        <span>Abidjan, Côte d'Ivoire</span>
+                    </div>
+                    <div class="flex items-center space-x-4">
+                        <i class="fas fa-phone-alt text-teal-500"></i>
+                        <span>+225 07 58 38 55 48</span>
+                    </div>
+                    <div class="flex items-center space-x-4">
+                        <i class="fas fa-envelope text-teal-500"></i>
+                        <span>hmadefense.gouv.ci@gmail.com</span>
+                    </div>
+                </div>
+            </div>
+            <div class="bg-white p-8 rounded-2xl shadow-lg">
+                <form id="appointmentForm" class="space-y-4">
+                    <div>
+                        <label class="block text-sm font-medium mb-1">Nom Complet</label>
+                        <input type="text" required class="w-full border rounded-lg px-4 py-2 focus:ring-2 focus:ring-teal-500 outline-none">
+                    </div>
+                    <div>
+                        <label class="block text-sm font-medium mb-1">Service Souhaité</label>
+                        <select class="w-full border rounded-lg px-4 py-2 focus:ring-2 focus:ring-teal-500 outline-none">
+                            <option>Consultation Générale</option>
+                            <option>Cardiologie</option>
+                            <option>Pédiatrie</option>
+                        </select>
+                    </div>
+                    <button type="submit" class="w-full bg-blue-900 text-white py-3 rounded-lg font-bold hover:bg-blue-800 transition">
+                        Prendre rendez-vous
+                    </button>
+                </form>
+            </div>
+        </div>
+    </section>
+
+    <footer class="bg-blue-900 text-white py-10 text-center">
+        <p>&copy; 2026 Hôpital Militaire d'Abidjan. Tous droits réservés.</p>
+    </footer>
+
+    <script>
+        // Fonction de scroll fluide
+        function scrollToSection(id) {
+            document.getElementById(id).scrollIntoView({ behavior: 'smooth' });
+        }
+
+        // Gestion du formulaire
+        document.getElementById('appointmentForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            alert('Merci ! Votre demande de rendez-vous a été envoyée. Nous vous contacterons sous peu.');
+            this.reset();
+        });
+    </script>
+</body>
+</html>
