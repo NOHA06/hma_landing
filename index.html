@@ -2,157 +2,660 @@
 <html lang="fr">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
     <title>HMA - Hôpital Militaire d'Abidjan</title>
+    <!-- Tailwind + Font Awesome + Google Fonts -->
     <script src="https://cdn.tailwindcss.com"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
     <style>
-        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&display=swap');
-        body { font-family: 'Inter', sans-serif; }
-        .hero-gradient { background: linear-gradient(135deg, #0f4c81 0%, #2a9d8f 100%); }
+        @import url('https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&display=swap');
+        * { font-family: 'Space Grotesk', sans-serif; scroll-behavior: smooth; }
+        
+        /* Tech gradient */
+        .hero-tech {
+            background: linear-gradient(110deg, #0a0f1c 0%, #0f1a2e 50%, #1a2a3f 100%);
+            position: relative;
+            overflow: hidden;
+        }
+        .hero-tech::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background-image: 
+                repeating-linear-gradient(90deg, rgba(255,255,255,0.02) 0px, rgba(255,255,255,0.02) 1px, transparent 1px, transparent 40px),
+                repeating-linear-gradient(0deg, rgba(255,255,255,0.02) 0px, rgba(255,255,255,0.02) 1px, transparent 1px, transparent 40px);
+            pointer-events: none;
+        }
+        
+        /* Glassmorphism pour les cartes */
+        .glass-card {
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(0px);
+            border: 1px solid rgba(0,0,0,0.05);
+            transition: all 0.3s cubic-bezier(0.2, 0.9, 0.4, 1.1);
+        }
+        .glass-card:hover {
+            transform: translateY(-4px);
+            border-color: rgba(234, 88, 12, 0.3);
+            box-shadow: 0 20px 30px -12px rgba(0,0,0,0.1);
+        }
+        
+        /* Accent tech */
+        .text-accent {
+            background: linear-gradient(135deg, #ea580c, #f97316);
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+        }
+        
+        /* Grid overlay subtil */
+        .grid-pattern {
+            background-image: radial-gradient(circle at 1px 1px, rgba(0,0,0,0.03) 1px, transparent 1px);
+            background-size: 24px 24px;
+        }
+        
+        .stat-card {
+            background: rgba(255,255,255,0.9);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255,255,255,0.2);
+            transition: all 0.2s ease;
+        }
+        
+        .btn-tech {
+            background: linear-gradient(135deg, #ea580c, #c2410c);
+            transition: all 0.2s;
+        }
+        .btn-tech:hover {
+            transform: scale(1.02);
+            box-shadow: 0 10px 25px -5px rgba(234, 88, 12, 0.4);
+        }
+        
+        .service-icon {
+            background: linear-gradient(135deg, #fef3c7, #ffedd5);
+        }
+        
+        .scroll-progress {
+            position: fixed;
+            top: 0;
+            left: 0;
+            height: 3px;
+            background: linear-gradient(90deg, #ea580c, #f97316);
+            width: 0%;
+            z-index: 1000;
+            transition: width 0.1s;
+        }
+        
+        /* Styles pour les galeries d'événements */
+        .event-gallery {
+            display: flex;
+            gap: 8px;
+            overflow-x: auto;
+            scroll-snap-type: x mandatory;
+            padding-bottom: 8px;
+        }
+        .event-gallery::-webkit-scrollbar {
+            height: 4px;
+        }
+        .event-gallery::-webkit-scrollbar-track {
+            background: #f1f1f1;
+            border-radius: 10px;
+        }
+        .event-gallery::-webkit-scrollbar-thumb {
+            background: #ea580c;
+            border-radius: 10px;
+        }
+        .gallery-img {
+            flex: 0 0 calc(33.333% - 6px);
+            scroll-snap-align: start;
+            aspect-ratio: 1 / 0.9;
+            object-fit: cover;
+            border-radius: 12px;
+            cursor: pointer;
+            transition: transform 0.2s, opacity 0.2s;
+            border: 1px solid rgba(0,0,0,0.1);
+        }
+        .gallery-img:hover {
+            transform: scale(1.02);
+            opacity: 0.9;
+        }
+        
+        /* Modal pour afficher les photos en grand */
+        .modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0,0,0,0.95);
+            z-index: 10000;
+            justify-content: center;
+            align-items: center;
+            cursor: pointer;
+        }
+        .modal img {
+            max-width: 90%;
+            max-height: 90%;
+            border-radius: 12px;
+            box-shadow: 0 20px 40px rgba(0,0,0,0.5);
+        }
+        .modal.active {
+            display: flex;
+        }
+        
+        .event-card {
+            transition: all 0.25s ease;
+        }
+        .event-card:hover {
+            transform: translateY(-5px);
+        }
+        
+        .event-date {
+            background: linear-gradient(135deg, #ea580c, #c2410c);
+        }
     </style>
 </head>
-<body class="bg-gray-50 text-gray-800">
 
-    <nav class="bg-white shadow-md sticky top-0 z-50">
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div class="flex justify-between h-20 items-center">
-                <div class="flex-shrink-0 flex items-center">
-                    <span class="text-2xl font-bold text-blue-900">H.M.A<span class="text-teal-500"></span></span>
+<!--Start of Tawk.to Script-->
+<script type="text/javascript">
+var Tawk_API=Tawk_API||{}, Tawk_LoadStart=new Date();
+(function(){
+var s1=document.createElement("script"),s0=document.getElementsByTagName("script")[0];
+s1.async=true;
+s1.src='https://embed.tawk.to/69d645736839171c36f0722a/1jlmfujkp';
+s1.charset='UTF-8';
+s1.setAttribute('crossorigin','*');
+s0.parentNode.insertBefore(s1,s0);
+})();
+</script>
+<!--End of Tawk.to Script-->
+<body class="bg-white text-gray-700 grid-pattern">
+
+    <div class="scroll-progress" id="progressBar"></div>
+
+    <!-- MODAL POUR AFFICHER LES PHOTOS EN GRAND -->
+    <div id="imageModal" class="modal" onclick="closeModal()">
+        <img id="modalImage" src="" alt="Agrandissement">
+    </div>
+
+    <!-- ================= NAVBAR ================= -->
+    <nav class="bg-white/80 backdrop-blur-md border-b border-gray-200 sticky top-0 z-50 transition-all duration-300">
+        <div class="max-w-7xl mx-auto px-6 py-4">
+            <div class="flex justify-between items-center">
+                <div class="flex items-center gap-3">
+                    <img src="HMA1.png" alt="HMA" class="h-11 w-auto">
+                    <div>
+                        <span class="font-bold text-xl tracking-tight text-gray-900">HMA<span class="text-orange-500"></span></span>
+                        <span class="text-xs text-gray-400 block -mt-1">Centre Medical</span>
+                    </div>
                 </div>
-                <div class="hidden md:flex space-x-8 font-medium">
-                    <a href="#accueil" class="hover:text-teal-600 transition">Accueil</a>
-                    <a href="#services" class="hover:text-teal-600 transition">Services</a>
-                    <a href="#apropos" class="hover:text-teal-600 transition">À Propos</a>
-                    <a href="#contact" class="bg-teal-500 text-white px-5 py-2 rounded-full hover:bg-teal-600 transition">Urgence 24h/7</a>
+                <div class="hidden md:flex items-center gap-6 text-sm font-medium">
+                    <a href="#accueil" class="text-gray-600 hover:text-orange-500 transition">Accueil</a>
+                    <a href="#services" class="text-gray-600 hover:text-orange-500 transition">Services</a>
+                    <a href="#evenements" class="text-gray-600 hover:text-orange-500 transition">Actualités</a>
+                    <a href="#assurances" class="text-gray-600 hover:text-orange-500 transition">Assurances</a>
+                    <a href="#apropos" class="text-gray-600 hover:text-orange-500 transition">À propos</a>
+                    <a href="#contact" class="btn-tech text-white px-5 py-2 rounded-full text-sm font-semibold shadow-md">Urgence 24/7</a>
+                    <a href="https://www.facebook.com/hopitalmilitaireabidjan" target="_blank" class="text-gray-500 hover:text-orange-500 text-lg"><i class="fab fa-facebook-f"></i></a>
+                </div>
+                <div class="md:hidden">
+                    <i class="fas fa-bars text-gray-700 text-xl"></i>
                 </div>
             </div>
         </div>
     </nav>
 
-    <header id="accueil" class="hero-gradient text-white py-20 px-4">
-        <div class="max-w-7xl mx-auto flex flex-col md:flex-row items-center">
-            <div class="md:w-1/2 mb-10 md:mb-0">
-                <h1 class="text-4xl md:text-6xl font-bold mb-6 leading-tight">
-                    Votre santé, notre priorité .
-                </h1>
-                <p class="text-lg mb-8 opacity-90">
-                    L'Hôpital Militaire d'Abidjan met à votre disposition une expertise médicale de pointe et un accueil chaleureux pour toute la famille.
-                </p>
-                <div class="flex space-x-4">
-                    <button onclick="scrollToSection('contact')" class="bg-white text-blue-900 px-8 py-3 rounded-lg font-semibold hover:bg-gray-100 transition">Prendre RDV</button>
-                    <button class="border border-white px-8 py-3 rounded-lg font-semibold hover:bg-white hover:text-blue-900 transition">Nos Services</button>
+    <!-- ================= BANDEAU URGENCE ================= -->
+    <div class="bg-gray-900 text-white text-sm py-2.5 px-4 text-center">
+        <div class="flex flex-wrap justify-center gap-6 items-center">
+            <span class="inline-flex items-center gap-2"><i class="fas fa-phone-alt text-orange-400 text-xs"></i> Urgences 24/7 : <strong class="font-mono">+225 07 58 38 55 48</strong></span>
+            <span class="inline-flex items-center gap-2"><i class="fas fa-ambulance text-orange-400 text-xs"></i> Ambulance : <strong class="font-mono">101 / 115</strong></span>
+            <a href="https://www.facebook.com/hopitalmilitaireabidjan" target="_blank" class="inline-flex items-center gap-2 hover:text-orange-400 transition"><i class="fab fa-facebook-messenger"></i> Facebook</a>
+        </div>
+    </div>
+
+    <!-- ================= HERO ================= -->
+    <header id="accueil" class="hero-tech text-white">
+        <div class="max-w-7xl mx-auto px-6 py-20 md:py-28 relative z-10">
+            <div class="grid md:grid-cols-2 gap-12 items-center">
+                <div>
+                    <div class="inline-flex items-center gap-2 bg-white/10 backdrop-blur-sm rounded-full px-3 py-1 text-xs font-mono mb-6 border border-white/20">
+                        <span class="w-2 h-2 bg-green-400 rounded-full animate-pulse"></span>
+                        HÔPITAL MILITAIRE D'ABIDJAN
+                    </div>
+                    <h1 class="text-5xl md:text-6xl font-bold tracking-tight leading-tight mb-6">
+                        Excellence <span class="text-accent">médicale</span><br>
+                    </h1>
+                    <p class="text-gray-300 text-lg mb-8 leading-relaxed max-w-lg">
+                   L'Hôpital Militaire d'Abidjan est un établissement public qui assure des soins de santé aux militaires et aux civils. </p>
+                    <div class="flex gap-4">
+                        <a href="#services" class="btn-tech text-white px-7 py-3 rounded-full font-semibold shadow-xl flex items-center gap-2">
+                            Explorer les services <i class="fas fa-arrow-right text-sm"></i>
+                        </a>
+                        <a href="#contact" class="border border-white/30 text-white px-7 py-3 rounded-full font-medium hover:bg-white/10 transition">Contact</a>
+                    </div>
                 </div>
-            </div>
-            <div class="md:w-1/2">
-                <img src="./couloir.JPG" alt="Hôpital" class="rounded-2xl shadow-2xl">
+                <div class="hidden md:block">
+                    <div class="relative">
+                        <div class="absolute -inset-4 bg-orange-500/20 rounded-2xl blur-2xl"></div>
+                        <img src="./carousel-1-1.jpg" alt="HMA" class="rounded-2xl shadow-2xl relative z-10 w-full object-cover max-h-96 border border-white/10">
+                    </div>
+                </div>
             </div>
         </div>
     </header>
 
-    <section class="max-w-7xl mx-auto -mt-12 px-4">
-        <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
-            <div class="bg-white p-6 rounded-xl shadow-lg flex items-center space-x-4">
-                <div class="bg-blue-100 p-4 rounded-full text-blue-600"><i class="fas fa-user-md text-2xl"></i></div>
-                <div><h3 class="font-bold text-xl">Experts</h3><p class="text-sm text-gray-500">Spécialistes qualifiés</p></div>
+    <!-- ================= STATS ================= -->
+        <!-- ================= STATS MODERNES - VARIANTE 2 ================= -->
+      <!-- ================= STATS MODERNES - VARIANTE 2 CORRIGÉE ================= -->
+    <div class="max-w-7xl mx-auto px-6 -mt-8 relative z-20">
+        <div class="grid grid-cols-3 gap-5">
+            <!-- Urgences 24/7 -->
+            <div class="stat-card rounded-xl p-5 text-center shadow-lg">
+                <i class="fas fa-clock text-orange-500 text-2xl mb-2"></i>
+                <div class="font-bold text-2xl text-gray-900 font-mono">24h/24</div>
+                <div class="text-xs text-gray-500 uppercase tracking-wide">7j/7 - Urgences</div>
             </div>
-            <div class="bg-white p-6 rounded-xl shadow-lg flex items-center space-x-4">
-                <div class="bg-teal-100 p-4 rounded-full text-teal-600"><i class="fas fa-clock text-2xl"></i></div>
-                <div><h3 class="font-bold text-xl">24h/7j</h3><p class="text-sm text-gray-500">Urgences disponibles</p></div>
+            <!-- Laboratoire -->
+            <div class="stat-card rounded-xl p-5 text-center shadow-lg">
+                <i class="fas fa-flask text-orange-500 text-2xl mb-2"></i>
+                <div class="font-bold text-xl text-gray-900 font-mono">LABO</div>
+                <div class="text-xs text-gray-500 uppercase tracking-wide">Analyses & bilans</div>
             </div>
-            <div class="bg-white p-6 rounded-xl shadow-lg flex items-center space-x-4">
-                <div class="bg-red-100 p-4 rounded-full text-red-600"><i class="fas fa-ambulance text-2xl"></i></div>
-                <div><h3 class="font-bold text-xl">Ambulance</h3><p class="text-sm text-gray-500">Service rapide</p></div>
+            <!-- Radiologie - avec icône qui existe -->
+            <div class="stat-card rounded-xl p-5 text-center shadow-lg">
+                <i class="fas fa-x-ray text-orange-500 text-2xl mb-2"></i>
+                <div class="font-bold text-xl text-gray-900 font-mono">RADIO</div>
+                <div class="text-xs text-gray-500 uppercase tracking-wide">Scanner & échographie</div>
             </div>
+        </div>
+    </div>
+
+    <!-- ================= SERVICES ================= -->
+    <section id="services" class="py-24 max-w-7xl mx-auto px-6">
+        <div class="text-center mb-14">
+            <span class="text-orange-500 text-sm font-mono tracking-wider">// SPÉCIALITÉS</span>
+            <h2 class="text-4xl font-bold text-gray-900 mt-2 mb-4">Infrastructure <span class="text-accent">médicale</span> complète</h2>
+            <p class="text-gray-500 max-w-2xl mx-auto">Des équipements de pointe et une équipe pluridisciplinaire pour des soins précis.</p>
+        </div>
+        <div class="grid grid-cols-2 md:grid-cols-4 gap-5">
+            <div class="glass-card rounded-xl p-5 text-center"><div class="w-14 h-14 service-icon rounded-2xl flex items-center justify-center mx-auto mb-4"><i class="fas fa-stethoscope text-orange-500 text-2xl"></i></div><h4 class="font-bold text-gray-900">Médecine générale</h4><p class="text-xs text-gray-500 mt-1">Consultations & bilans</p></div>
+            <div class="glass-card rounded-xl p-5 text-center"><div class="w-14 h-14 service-icon rounded-2xl flex items-center justify-center mx-auto mb-4"><i class="fas fa-heartbeat text-orange-500 text-2xl"></i></div><h4 class="font-bold text-gray-900">Cardiologie</h4><p class="text-xs text-gray-500 mt-1">Explorations cardiaques</p></div>
+            <div class="glass-card rounded-xl p-5 text-center"><div class="w-14 h-14 service-icon rounded-2xl flex items-center justify-center mx-auto mb-4"><i class="fas fa-brain text-orange-500 text-2xl"></i></div><h4 class="font-bold text-gray-900">Neurologie</h4><p class="text-xs text-gray-500 mt-1">Pathologies nerveuses</p></div>
+            <div class="glass-card rounded-xl p-5 text-center"><div class="w-14 h-14 service-icon rounded-2xl flex items-center justify-center mx-auto mb-4"><i class="fas fa-scalpel text-orange-500 text-2xl"></i></div><h4 class="font-bold text-gray-900">Chirurgie</h4><p class="text-xs text-gray-500 mt-1">Blocs ultramodernes</p></div>
+            <div class="glass-card rounded-xl p-5 text-center"><div class="w-14 h-14 service-icon rounded-2xl flex items-center justify-center mx-auto mb-4"><i class="fas fa-x-ray text-orange-500 text-2xl"></i></div><h4 class="font-bold text-gray-900">Imagerie</h4><p class="text-xs text-gray-500 mt-1">IRM / Scanner 3T</p></div>
+            <div class="glass-card rounded-xl p-5 text-center"><div class="w-14 h-14 service-icon rounded-2xl flex items-center justify-center mx-auto mb-4"><i class="fas fa-microscope text-orange-500 text-2xl"></i></div><h4 class="font-bold text-gray-900">Laboratoire</h4><p class="text-xs text-gray-500 mt-1">Analyses haute précision</p></div>
+            <div class="glass-card rounded-xl p-5 text-center"><div class="w-14 h-14 service-icon rounded-2xl flex items-center justify-center mx-auto mb-4"><i class="fas fa-lungs text-orange-500 text-2xl"></i></div><h4 class="font-bold text-gray-900">Pneumologie</h4><p class="text-xs text-gray-500 mt-1">Soins respiratoires</p></div>
+            <div class="glass-card rounded-xl p-5 text-center"><div class="w-14 h-14 service-icon rounded-2xl flex items-center justify-center mx-auto mb-4"><i class="fas fa-female text-orange-500 text-2xl"></i></div><h4 class="font-bold text-gray-900">Gynécologie</h4><p class="text-xs text-gray-500 mt-1">Suivi & obstétrique</p></div>
+        </div>
+        <div class="text-center mt-8"><p class="text-sm text-gray-400 font-mono">+ 30 autres spécialités • Pédiatrie • Ophtalmologie • ORL • Dermatologie • Néphrologie • Kinésithérapie • Oncologie</p></div>
+    </section>
+
+    <!-- ================= SECTION ACTUALITÉS & ÉVÉNEMENTS AVEC GALERIES PHOTOS ================= -->
+    <section id="evenements" class="py-20 bg-gradient-to-b from-white to-orange-50/30">
+        <div class="max-w-7xl mx-auto px-6">
+            <div class="text-center mb-12">
+                <span class="text-orange-500 text-sm font-mono tracking-wider">// ACTUALITÉS</span>
+                <h2 class="text-4xl font-bold text-gray-900 mt-2 mb-4">Événements & <span class="text-accent">campagnes</span> de santé</h2>
+                <p class="text-gray-500 max-w-2xl mx-auto">L'HMA s'engage toute l'année pour la prévention et la sensibilisation.</p>
+            </div>
+
+            <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+                
+                <!-- ÉVÉNEMENT 1 - Octobre Rose -->
+                <div class="bg-white rounded-2xl shadow-lg overflow-hidden event-card border border-gray-100">
+                    <div class="p-4 pb-0">
+                        <div class="event-gallery">
+                            <img src="./OCTOBRE ROSE 1.jpg" class="gallery-img" onclick="openModal(this.src)" alt="Octobre Rose campagne 1">
+                            <img src="./photo1.jpg" class="gallery-img" onclick="openModal(this.src)" alt="Octobre Rose campagne 2">
+                            <img src="./OCTOBRE ROSE.jpg" class="gallery-img" onclick="openModal(this.src)" alt="Octobre Rose campagne 3">
+                        </div>
+                    </div>
+                    <div class="p-6 pt-3">
+                        <div class="flex items-center gap-2 mb-2">
+                            <i class="fas fa-calendar-alt text-pink-500 text-sm"></i>
+                            <span class="text-xs text-gray-500 font-mono">Tout le mois d'Octobre</span>
+                            <span class="event-date text-white text-xs font-bold px-3 py-1 rounded-full ml-auto">Octobre</span>
+                        </div>
+                        <h3 class="text-xl font-bold text-gray-900 mb-2">Octobre Rose 🌸</h3>
+                        <p class="text-gray-600 text-sm leading-relaxed mb-3">Campagne de sensibilisation et de dépistage gratuit du cancer du sein. Mammographies à prix réduit, consultations avec nos spécialistes.</p>
+                        <div class="flex flex-wrap gap-2 mb-4">
+                            <span class="text-xs bg-pink-50 text-pink-600 px-2 py-1 rounded-full">Dépistage gratuit</span>
+                            <span class="text-xs bg-pink-50 text-pink-600 px-2 py-1 rounded-full">Mammographie</span>
+                        </div>
+                        <a href="#contact" class="inline-flex items-center text-orange-600 text-sm font-semibold hover:text-orange-700">Prendre rendez-vous <i class="fas fa-arrow-right ml-1 text-xs"></i></a>
+                    </div>
+                </div>
+
+                <!-- ÉVÉNEMENT 2 - Dépistage Hépatite -->
+                <div class="bg-white rounded-2xl shadow-lg overflow-hidden event-card border border-gray-100">
+                    <div class="p-4 pb-0">
+                        <div class="event-gallery">
+                            <img src="./HEPATITTE.jpg" class="gallery-img" onclick="openModal(this.src)" alt="Dépistage hépatite 1">
+                            <img src="./HEPATITE2.jpg" class="gallery-img" onclick="openModal(this.src)" alt="Dépistage hépatite 2">
+                            <img src="./hepatite3.jpg" class="gallery-img" onclick="openModal(this.src)" alt="Dépistage hépatite 3">
+                        </div>
+                    </div>
+                    <div class="p-6 pt-3">
+                        <div class="flex items-center gap-2 mb-2">
+                            <i class="fas fa-calendar-alt text-yellow-600 text-sm"></i>
+                            <span class="text-xs text-gray-500 font-mono">Journée mondiale contre l'hépatite</span>
+                            <span class="event-date text-white text-xs font-bold px-3 py-1 rounded-full ml-auto">28 Juillet</span>
+                        </div>
+                        <h3 class="text-xl font-bold text-gray-900 mb-2">Dépistage Hépatite B & C</h3>
+                        <p class="text-gray-600 text-sm leading-relaxed mb-3">Tests rapides gratuits, consultations avec hépatologues et campagne de vaccination à prix coûtant.</p>
+                        <div class="flex flex-wrap gap-2 mb-4">
+                            <span class="text-xs bg-yellow-50 text-yellow-700 px-2 py-1 rounded-full">Test rapide gratuit</span>
+                            <span class="text-xs bg-yellow-50 text-yellow-700 px-2 py-1 rounded-full">Vaccination</span>
+                        </div>
+                        <a href="#contact" class="inline-flex items-center text-orange-600 text-sm font-semibold hover:text-orange-700">Prendre rendez-vous <i class="fas fa-arrow-right ml-1 text-xs"></i></a>
+                    </div>
+                </div>
+
+                <!-- ÉVÉNEMENT 3 - Diabète & Hypertension -->
+                <div class="bg-white rounded-2xl shadow-lg overflow-hidden event-card border border-gray-100">
+                    <div class="p-4 pb-0">
+                        <div class="event-gallery">
+                            <img src="https://placehold.co/400x350/red/white?text=Diabète+1" class="gallery-img" onclick="openModal(this.src)" alt="Dépistage diabète 1">
+                            <img src="https://placehold.co/400x350/red/white?text=Glycémie+2" class="gallery-img" onclick="openModal(this.src)" alt="Dépistage diabète 2">
+                            <img src="https://placehold.co/400x350/red/white?text=Nutrition+3" class="gallery-img" onclick="openModal(this.src)" alt="Dépistage diabète 3">
+                        </div>
+                    </div>
+                    <div class="p-6 pt-3">
+                        <div class="flex items-center gap-2 mb-2">
+                            <i class="fas fa-calendar-alt text-red-500 text-sm"></i>
+                            <span class="text-xs text-gray-500 font-mono">Journée mondiale du diabète</span>
+                            <span class="event-date text-white text-xs font-bold px-3 py-1 rounded-full ml-auto">14 Novembre</span>
+                        </div>
+                        <h3 class="text-xl font-bold text-gray-900 mb-2">Dépistage cardiométabolique</h3>
+                        <p class="text-gray-600 text-sm leading-relaxed mb-3">Campagne de dépistage du diabète et de l'hypertension. Sensibilisation aux facteurs de risque.</p>
+                        <div class="flex flex-wrap gap-2 mb-4">
+                            <span class="text-xs bg-red-50 text-red-600 px-2 py-1 rounded-full">Glycémie gratuite</span>
+                            <span class="text-xs bg-red-50 text-red-600 px-2 py-1 rounded-full">Tension artérielle</span>
+                        </div>
+                        <a href="#contact" class="inline-flex items-center text-orange-600 text-sm font-semibold hover:text-orange-700">Prendre rendez-vous <i class="fas fa-arrow-right ml-1 text-xs"></i></a>
+                    </div>
+                </div>
+
+                
+           
         </div>
     </section>
 
-    <section id="services" class="py-20 max-w-7xl mx-auto px-4">
-        <div class="text-center mb-16">
-            <h2 class="text-3xl font-bold text-blue-900 mb-4">Nos Spécialités</h2>
-            <p class="text-gray-600 max-w-2xl mx-auto">Nous offrons une gamme complète de soins médicaux pour répondre à tous vos besoins de santé.</p>
-        </div>
-        <div class="grid grid-cols-1 md:grid-cols-4 gap-8">
-            <div class="bg-white p-8 rounded-xl border border-gray-100 hover:shadow-xl transition text-center">
-                <i class="fas fa-heartbeat text-4xl text-teal-500 mb-4"></i>
-                <h4 class="font-bold mb-2">Cardiologie</h4>
-                <p class="text-sm text-gray-500">Soins complets pour votre cœur.</p>
+    <!-- ================= ASSURANCES ================= -->
+    <section id="assurances" class="py-20 bg-gray-50">
+        <div class="max-w-7xl mx-auto px-6">
+            <div class="text-center mb-12">
+                <span class="text-orange-500 text-sm font-mono tracking-wider">// PARTENAIRES</span>
+                <h2 class="text-3xl font-bold text-gray-900 mt-2">Assurances & conventions</h2>
+                <p class="text-gray-500 max-w-xl mx-auto mt-3">Prise en charge simplifiée avec nos partenaires.</p>
             </div>
-            <div class="bg-white p-8 rounded-xl border border-gray-100 hover:shadow-xl transition text-center">
-                <i class="fas fa-baby text-4xl text-teal-500 mb-4"></i>
-                <h4 class="font-bold mb-2">Pédiatrie</h4>
-                <p class="text-sm text-gray-500">La santé de vos enfants.</p>
+            <div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-4">
+                <div class="bg-white rounded-lg p-4 text-center shadow-sm border border-gray-100">
+                    <img src="./assurances/allianz.jpeg" alt="NSIA" 
+                    class="h-10 mx-auto object-contain" onerror="this.src='https://placehold.co/100x40?text=NSIA'">
+                    <p class="text-xs text-gray-600 mt-2 font-mono">ALLIANZ</p>
+                </div>
+
+                <div class="bg-white rounded-lg p-4 text-center shadow-sm border border-gray-100">
+                    <img src="./assurances/amatci.png" alt="NSIA" 
+                    class="h-10 mx-auto object-contain" onerror="this.src='https://placehold.co/100x40?text=NSIA'">
+                    <p class="text-xs text-gray-600 mt-2 font-mono">AMATCI</p>
+                </div>
+                <div class="bg-white rounded-lg p-4 text-center shadow-sm border border-gray-100">
+                    <img src="./assurances/ascoma.png" alt="NSIA" 
+                    class="h-10 mx-auto object-contain" onerror="this.src='https://placehold.co/100x40?text=NSIA'">
+                    <p class="text-xs text-gray-600 mt-2 font-mono">ASCOMA</p>
+                </div>
+                <div class="bg-white rounded-lg p-4 text-center shadow-sm border border-gray-100">
+                    <img src="./assurances/assura.jpeg" alt="NSIA" 
+                    class="h-10 mx-auto object-contain" onerror="this.src='https://placehold.co/100x40?text=NSIA'">
+                    <p class="text-xs text-gray-600 mt-2 font-mono">ASSURA</p>
+                </div>
+                <div class="bg-white rounded-lg p-4 text-center shadow-sm border border-gray-100">
+                    <img src="./assurances/amatci.png" alt="NSIA" 
+                    class="h-10 mx-auto object-contain" onerror="this.src='https://placehold.co/100x40?text=NSIA'">
+                    <p class="text-xs text-gray-600 mt-2 font-mono">AMATCI</p>
+                </div>
+                <div class="bg-white rounded-lg p-4 text-center shadow-sm border border-gray-100">
+                    <img src="./assurances/cie.png" alt="NSIA" 
+                    class="h-10 mx-auto object-contain" onerror="this.src='https://placehold.co/100x40?text=NSIA'">
+                    <p class="text-xs text-gray-600 mt-2 font-mono">CIE</p>
+                </div>
+                <div class="bg-white rounded-lg p-4 text-center shadow-sm border border-gray-100">
+                    <img src="./assurances/cimef.png" alt="NSIA" 
+                    class="h-10 mx-auto object-contain" onerror="this.src='https://placehold.co/100x40?text=NSIA'">
+                    <p class="text-xs text-gray-600 mt-2 font-mono">CIMEF</p>
+                </div>
+                <div class="bg-white rounded-lg p-4 text-center shadow-sm border border-gray-100">
+                    <img src="./assurances/cnam.jpeg" alt="NSIA" 
+                    class="h-10 mx-auto object-contain" onerror="this.src='https://placehold.co/100x40?text=NSIA'">
+                    <p class="text-xs text-gray-600 mt-2 font-mono">CNAM</p>
+                </div>
+                <div class="bg-white rounded-lg p-4 text-center shadow-sm border border-gray-100">
+                    <img src="./assurances/cnra.jpeg" alt="NSIA" 
+                    class="h-10 mx-auto object-contain" onerror="this.src='https://placehold.co/100x40?text=NSIA'">
+                    <p class="text-xs text-gray-600 mt-2 font-mono">CNRA</p>
+                </div>
+                <div class="bg-white rounded-lg p-4 text-center shadow-sm border border-gray-100">
+                    <img src="./assurances/eauxforet.jpeg" alt="NSIA" 
+                    class="h-10 mx-auto object-contain" onerror="this.src='https://placehold.co/100x40?text=NSIA'">
+                    <p class="text-xs text-gray-600 mt-2 font-mono">EAUX ET FORET</p>
+                </div>
+                <div class="bg-white rounded-lg p-4 text-center shadow-sm border border-gray-100">
+                    <img src="./assurances/erma.png" alt="NSIA" 
+                    class="h-10 mx-auto object-contain" onerror="this.src='https://placehold.co/100x40?text=NSIA'">
+                    <p class="text-xs text-gray-600 mt-2 font-mono">ERMA</p>
+                </div>
+                <div class="bg-white rounded-lg p-4 text-center shadow-sm border border-gray-100">
+                    <img src="./assurances/gamca.png" alt="NSIA" 
+                    class="h-10 mx-auto object-contain" onerror="this.src='https://placehold.co/100x40?text=NSIA'">
+                    <p class="text-xs text-gray-600 mt-2 font-mono">GAMCA</p>
+                </div>
+                <div class="bg-white rounded-lg p-4 text-center shadow-sm border border-gray-100">
+                    <img src="./assurances/ggasante.png" alt="NSIA" 
+                    class="h-10 mx-auto object-contain" onerror="this.src='https://placehold.co/100x40?text=NSIA'">
+                    <p class="text-xs text-gray-600 mt-2 font-mono">GGA SANTE</p>
+                </div>
+                <div class="bg-white rounded-lg p-4 text-center shadow-sm border border-gray-100">
+                    <img src="./assurances/iips.jpeg" alt="NSIA" 
+                    class="h-10 mx-auto object-contain" onerror="this.src='https://placehold.co/100x40?text=NSIA'">
+                    <p class="text-xs text-gray-600 mt-2 font-mono">IIPS</p>
+                </div>
+                <div class="bg-white rounded-lg p-4 text-center shadow-sm border border-gray-100">
+                    <img src="./assurances/ivoirgolf.png" alt="NSIA" 
+                    class="h-10 mx-auto object-contain" onerror="this.src='https://placehold.co/100x40?text=NSIA'">
+                    <p class="text-xs text-gray-600 mt-2 font-mono">IVOIRGOLF</p>
+                </div>
+                <div class="bg-white rounded-lg p-4 text-center shadow-sm border border-gray-100">
+                    <img src="./assurances/ivoirsante.jpg" alt="NSIA" 
+                    class="h-10 mx-auto object-contain" onerror="this.src='https://placehold.co/100x40?text=NSIA'">
+                    <p class="text-xs text-gray-600 mt-2 font-mono">IVOIRE SANTE</p>
+                </div>
+                <div class="bg-white rounded-lg p-4 text-center shadow-sm border border-gray-100">
+                    <img src="./assurances/ivosep.jpeg" alt="NSIA" 
+                    class="h-10 mx-auto object-contain" onerror="this.src='https://placehold.co/100x40?text=NSIA'">
+                    <p class="text-xs text-gray-600 mt-2 font-mono">IVOSEP</p>
+                </div>
+                 <div class="bg-white rounded-lg p-4 text-center shadow-sm border border-gray-100">
+                    <img src="./assurances/librairiede france.png" alt="NSIA" 
+                    class="h-10 mx-auto object-contain" onerror="this.src='https://placehold.co/100x40?text=NSIA'">
+                    <p class="text-xs text-gray-600 mt-2 font-mono">LIBRAIRIE DE FRANCE</p>
+                </div>
+                <div class="bg-white rounded-lg p-4 text-center shadow-sm border border-gray-100">
+                    <img src="./assurances/loyal.jpeg" alt="NSIA" 
+                    class="h-10 mx-auto object-contain" onerror="this.src='https://placehold.co/100x40?text=NSIA'">
+                    <p class="text-xs text-gray-600 mt-2 font-mono">LA LOYAL</p>
+                </div>
+                <div class="bg-white rounded-lg p-4 text-center shadow-sm border border-gray-100">
+                    <img src="./assurances/maeci.jpeg" alt="NSIA" 
+                    class="h-10 mx-auto object-contain" onerror="this.src='https://placehold.co/100x40?text=NSIA'">
+                    <p class="text-xs text-gray-600 mt-2 font-mono">MAECI</p>
+                </div>
+                <div class="bg-white rounded-lg p-4 text-center shadow-sm border border-gray-100">
+                    <img src="./assurances/munasur.jpeg" alt="NSIA" 
+                    class="h-10 mx-auto object-contain" onerror="this.src='https://placehold.co/100x40?text=NSIA'">
+                    <p class="text-xs text-gray-600 mt-2 font-mono">MUNASSUR</p>
+                </div>
+                <div class="bg-white rounded-lg p-4 text-center shadow-sm border border-gray-100">
+                    <img src="./assurances/palmci.jpeg" alt="NSIA" 
+                    class="h-10 mx-auto object-contain" onerror="this.src='https://placehold.co/100x40?text=NSIA'">
+                    <p class="text-xs text-gray-600 mt-2 font-mono">PALM CI</p>
+                </div>
+                <div class="bg-white rounded-lg p-4 text-center shadow-sm border border-gray-100">
+                    <img src="./assurances/panassur.png" alt="NSIA" 
+                    class="h-10 mx-auto object-contain" onerror="this.src='https://placehold.co/100x40?text=NSIA'">
+                    <p class="text-xs text-gray-600 mt-2 font-mono">PANASSUR</p>
+                </div>
+                <div class="bg-white rounded-lg p-4 text-center shadow-sm border border-gray-100">
+                    <img src="./assurances/saph.png" alt="NSIA" 
+                    class="h-10 mx-auto object-contain" onerror="this.src='https://placehold.co/100x40?text=NSIA'">
+                    <p class="text-xs text-gray-600 mt-2 font-mono">SAPH</p>
+                </div>
+                <div class="bg-white rounded-lg p-4 text-center shadow-sm border border-gray-100">
+                    <img src="./assurances/sipromed.png" alt="NSIA" 
+                    class="h-10 mx-auto object-contain" onerror="this.src='https://placehold.co/100x40?text=NSIA'">
+                    <p class="text-xs text-gray-600 mt-2 font-mono">SIPROMED</p>
+                </div>
+                <div class="bg-white rounded-lg p-4 text-center shadow-sm border border-gray-100">
+                    <img src="./assurances/sodeci.jpeg" alt="NSIA" 
+                    class="h-10 mx-auto object-contain" onerror="this.src='https://placehold.co/100x40?text=NSIA'">
+                    <p class="text-xs text-gray-600 mt-2 font-mono">SODECI</p>
+                </div>
+                <div class="bg-white rounded-lg p-4 text-center shadow-sm border border-gray-100">
+                    <img src="./assurances/sofitel.png" alt="NSIA" 
+                    class="h-10 mx-auto object-contain" onerror="this.src='https://placehold.co/100x40?text=NSIA'">
+                    <p class="text-xs text-gray-600 mt-2 font-mono">SOFITEL</p>
+                </div>
+                <div class="bg-white rounded-lg p-4 text-center shadow-sm border border-gray-100">
+                    <img src="./assurances/sogemad.png" alt="NSIA" 
+                    class="h-10 mx-auto object-contain" onerror="this.src='https://placehold.co/100x40?text=NSIA'">
+                    <p class="text-xs text-gray-600 mt-2 font-mono">SOGEMAD</p>
+                </div>
+                <div class="bg-white rounded-lg p-4 text-center shadow-sm border border-gray-100">
+                    <img src="./assurances/vitalis.jpeg" alt="NSIA" 
+                    class="h-10 mx-auto object-contain" onerror="this.src='https://placehold.co/100x40?text=NSIA'">
+                    <p class="text-xs text-gray-600 mt-2 font-mono">VITALIS</p>
+                </div>
+                <div class="bg-white rounded-lg p-4 text-center shadow-sm border border-gray-100">
+                    <img src="./assurances/wtw.png" alt="NSIA" 
+                    class="h-10 mx-auto object-contain" onerror="this.src='https://placehold.co/100x40?text=NSIA'">
+                    <p class="text-xs text-gray-600 mt-2 font-mono">WTW</p>
+                </div>
             </div>
-            <div class="bg-white p-8 rounded-xl border border-gray-100 hover:shadow-xl transition text-center">
-                <i class="fas fa-microscope text-4xl text-teal-500 mb-4"></i>
-                <h4 class="font-bold mb-2">Laboratoire</h4>
-                <p class="text-sm text-gray-500">Analyses rapides et précises.</p>
-            </div>
-            <div class="bg-white p-8 rounded-xl border border-gray-100 hover:shadow-xl transition text-center">
-                <i class="fas fa-tooth text-4xl text-teal-500 mb-4"></i>
-                <h4 class="font-bold mb-2">Dentisterie</h4>
-                <p class="text-sm text-gray-500">Sourire éclatant et sain.</p>
-            </div>
+            <div class="text-center mt-8"><p class="text-sm text-gray-500"><i class="fas fa-phone-alt text-orange-500 mr-2"></i> Service convention : <strong class="font-mono">+225 07 58 38 55 48</strong> — hmadefense.gouv.ci@gmail.com</p></div>
         </div>
     </section>
 
-    <section id="contact" class="py-20 bg-gray-100">
-        <div class="max-w-7xl mx-auto px-4 grid grid-cols-1 md:grid-cols-2 gap-12">
+    <!-- ================= À PROPOS ================= -->
+       <!-- ================= À PROPOS AVEC 4 IMAGES ================= -->
+    <section id="apropos" class="py-20 max-w-7xl mx-auto px-6">
+        <div class="grid md:grid-cols-2 gap-12 items-center">
+            <!-- Galerie de 4 images -->
             <div>
-                <h2 class="text-3xl font-bold text-blue-900 mb-6">Contactez-nous</h2>
-                <p class="mb-8 text-gray-600">Situé au cœur d'Abidjan, l'Hôpital Militaire d'Abidjan est accessible facilement pour tous vos besoins médicaux.</p>
-                <div class="space-y-4">
-                    <div class="flex items-center space-x-4">
-                        <i class="fas fa-map-marker-alt text-teal-500"></i>
-                        <span>Abidjan, Côte d'Ivoire</span>
+                <div class="grid grid-cols-2 gap-3">
+                    <div class="relative overflow-hidden rounded-xl shadow-md aspect-square">
+                        <img src="./IMG_4127.JPG" alt="Hôpital - Couloir moderne" class="w-full h-full object-cover hover:scale-105 transition duration-500">
                     </div>
-                    <div class="flex items-center space-x-4">
-                        <i class="fas fa-phone-alt text-teal-500"></i>
-                        <span>+225 07 58 38 55 48</span>
+                    <div class="relative overflow-hidden rounded-xl shadow-md aspect-square">
+                        <img src="./photo1-294.jpg" alt="Bloc opératoire" class="w-full h-full object-cover hover:scale-105 transition duration-500" onerror="this.src='https://placehold.co/400x400/1a2a3f/white?text=Bloc+Op%C3%A9ratoire'">
                     </div>
-                    <div class="flex items-center space-x-4">
-                        <i class="fas fa-envelope text-teal-500"></i>
-                        <span>hmadefense.gouv.ci@gmail.com</span>
+                    <div class="relative overflow-hidden rounded-xl shadow-md aspect-square">
+                        <img src="./rt2.jpg" alt="IRM 3 Tesla" class="w-full h-full object-cover hover:scale-105 transition duration-500" onerror="this.src='https://placehold.co/400x400/1a2a3f/white?text=IRM+3T'">
+                    </div>
+                    <div class="relative overflow-hidden rounded-xl shadow-md aspect-square">
+                        <img src="./photo1-286.jpg" alt="Laboratoire" class="w-full h-full object-cover hover:scale-105 transition duration-500" onerror="this.src='https://placehold.co/400x400/1a2a3f/white?text=Laboratoire'">
                     </div>
                 </div>
             </div>
-            <div class="bg-white p-8 rounded-2xl shadow-lg">
-                <form id="appointmentForm" class="space-y-4">
-                    <div>
-                        <label class="block text-sm font-medium mb-1">Nom Complet</label>
-                        <input type="text" required class="w-full border rounded-lg px-4 py-2 focus:ring-2 focus:ring-teal-500 outline-none">
-                    </div>
-                    <div>
-                        <label class="block text-sm font-medium mb-1">Service Souhaité</label>
-                        <select class="w-full border rounded-lg px-4 py-2 focus:ring-2 focus:ring-teal-500 outline-none">
-                            <option>Consultation Générale</option>
-                            <option>Cardiologie</option>
-                            <option>Pédiatrie</option>
-                        </select>
-                    </div>
-                    <button type="submit" class="w-full bg-blue-900 text-white py-3 rounded-lg font-bold hover:bg-blue-800 transition">
-                        Prendre rendez-vous
-                    </button>
-                </form>
+            <!-- Texte à droite -->
+
+            <div>
+                 <span class="text-orange-500 text-sm font-mono tracking-wider">// HÔPITAL MILITAIRE D'ABIDJAN</span>
+                <h2 class="text-3xl font-bold text-gray-900 mt-2 mb-5">À propos <span class="text-accent">de notre établissement</span></h2>
+                <p class="text-gray-600 leading-relaxed mb-4">L'Hôpital Militaire d'Abidjan assure des soins de santé pour les militaires, leurs ayants droit et les civils.</p>
+                <p class="text-gray-600 leading-relaxed mb-4">Notre établissement dispose de plusieurs services médicaux et d'une équipe dédiée à l'accueil et aux soins des patients.</p>
+                <p class="text-gray-600 leading-relaxed">Pour plus d'informations, veuillez nous contacter directement.</p>
+                <div class="mt-6 flex flex-wrap gap-4 text-sm">
+                    <div class="flex items-center gap-2"><i class="fas fa-phone-alt text-orange-500"></i> Urgences 24/24</div>
+                    <div class="flex items-center gap-2"><i class="fas fa-stethoscope text-orange-500"></i> Multiples spécialités</div>
+                </div>
             </div>
         </div>
     </section>
 
-    <footer class="bg-blue-900 text-white py-10 text-center">
-        <p>&copy; 2026 Hôpital Militaire d'Abidjan. Tous droits réservés.</p>
+    <!-- ================= CONTACT ================= -->
+    <section id="contact" class="py-20 bg-gray-50">
+        <div class="max-w-7xl mx-auto px-6">
+            <div class="text-center mb-12"><span class="text-orange-500 text-sm font-mono tracking-wider">// CONTACT</span><h2 class="text-3xl font-bold text-gray-900 mt-2">Nous contacter</h2><div class="w-12 h-0.5 bg-orange-500 mx-auto mt-3"></div></div>
+            <div class="grid md:grid-cols-2 gap-10">
+                <div class="bg-white rounded-xl shadow-md p-7"><h3 class="font-bold text-xl text-gray-900 mb-6"><i class="fas fa-location-dot text-orange-500 mr-2"></i> Informations</h3><div class="space-y-4 text-gray-600"><div class="flex items-start gap-3"><i class="fas fa-map-pin text-orange-500 mt-1 w-5"></i><span>Route du Zoo, Abobo, Abidjan</span></div><div class="flex items-start gap-3"><i class="fas fa-phone-alt text-orange-500 mt-1 w-5"></i><span><strong>Standard :</strong> +225 07 58 38 55 48</span></div><div class="flex items-start gap-3"></div><div class="flex items-start gap-3"><i class="fas fa-envelope text-orange-500 mt-1 w-5"></i><span>hamdefense.gouv.ci@gmail.com</span></div><div class="flex items-start gap-3"><i class="fab fa-facebook text-orange-500 mt-1 w-5"></i><span><a href="https://www.facebook.com/profile.php?id=61557155165989" target="_blank" class="text-blue-600 hover:underline">facebook.com/hopitalmilitaireabidjan</a></span></div></div></div>
+                <div class="bg-white rounded-xl shadow-md p-7"><h3 class="font-bold text-xl text-gray-900 mb-6"><i class="fas fa-paper-plane text-orange-500 mr-2"></i> Formulaire</h3><form action="https://formspree.io/f/xzdkoyla" method="POST" class="space-y-4"><input type="text" name="nom" placeholder="Nom complet" required class="w-full border border-gray-200 rounded-lg px-4 py-3 focus:outline-none focus:ring-2 focus:ring-orange-400"><input type="tel" name="telephone" placeholder="Téléphone" required class="w-full border border-gray-200 rounded-lg px-4 py-3 focus:outline-none focus:ring-2 focus:ring-orange-400"><input type="email" name="email" placeholder="Email" required class="w-full border border-gray-200 rounded-lg px-4 py-3 focus:outline-none focus:ring-2 focus:ring-orange-400"><textarea name="message" rows="3" placeholder="Votre message" required class="w-full border border-gray-200 rounded-lg px-4 py-3 focus:outline-none focus:ring-2 focus:ring-orange-400"></textarea><button type="submit" class="btn-tech text-white px-6 py-3 rounded-lg font-semibold w-full">Envoyer <i class="fas fa-arrow-right ml-2"></i></button></form></div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ================= FOOTER ================= -->
+    <footer class="bg-gray-900 text-gray-500 py-8 border-t border-gray-800">
+        <div class="max-w-7xl mx-auto px-6 text-center text-sm"><p>© 2026 Hôpital Militaire d'Abidjan — Tous droits réservés</p></div>
     </footer>
 
     <script>
-        // Fonction de scroll fluide
-        function scrollToSection(id) {
-            document.getElementById(id).scrollIntoView({ behavior: 'smooth' });
+        // Scroll progress bar
+        window.addEventListener('scroll', () => {
+            const winScroll = document.body.scrollTop || document.documentElement.scrollTop;
+            const height = document.documentElement.scrollHeight - document.documentElement.clientHeight;
+            const scrolled = (winScroll / height) * 100;
+            document.getElementById('progressBar').style.width = scrolled + '%';
+        });
+        
+        // Smooth scroll
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function(e) {
+                const target = this.getAttribute('href');
+                if(target === "#" || target === "") return;
+                const el = document.querySelector(target);
+                if(el) {
+                    e.preventDefault();
+                    el.scrollIntoView({ behavior: 'smooth' });
+                }
+            });
+        });
+        
+        // Navbar effect
+        window.addEventListener('scroll', () => {
+            const nav = document.querySelector('nav');
+            if (window.scrollY > 100) {
+                nav.classList.add('shadow-lg', 'bg-white/95');
+            } else {
+                nav.classList.remove('shadow-lg', 'bg-white/95');
+                nav.classList.add('bg-white/80');
+            }
+        });
+        
+        // Modal functions for image gallery
+        function openModal(src) {
+            const modal = document.getElementById('imageModal');
+            const modalImg = document.getElementById('modalImage');
+            modalImg.src = src;
+            modal.classList.add('active');
+            document.body.style.overflow = 'hidden';
         }
-
-        // Gestion du formulaire
-        document.getElementById('appointmentForm').addEventListener('submit', function(e) {
-            e.preventDefault();
-            alert('Merci ! Votre demande de rendez-vous a été envoyée. Nous vous contacterons sous peu.');
-            this.reset();
+        
+        function closeModal() {
+            const modal = document.getElementById('imageModal');
+            modal.classList.remove('active');
+            document.body.style.overflow = '';
+        }
+        
+        // Close modal with Escape key
+        document.addEventListener('keydown', function(e) {
+            if (e.key === 'Escape') {
+                closeModal();
+            }
         });
     </script>
 </body>
