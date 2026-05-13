@@ -331,66 +331,228 @@ s0.parentNode.insertBefore(s1,s0);
     </div>
 
     <!-- ================= SERVICES AVEC RECHERCHE ================= -->
-    <section id="services" class="py-24 max-w-7xl mx-auto px-6">
-        <div class="text-center mb-14">
-            <span class="text-orange-500 text-sm font-mono tracking-wider">// SPÉCIALITÉS</span>
-            <h2 class="text-4xl font-bold text-gray-900 mt-2 mb-4">Infrastructure <span class="text-accent">médicale</span> complète</h2>
-            <p class="text-gray-500 max-w-2xl mx-auto">Des équipements de pointe et une équipe pluridisciplinaire pour des soins précis.</p>
-        </div>
+  <!-- ================= SERVICES AVEC RECHERCHE (LISTE OFFICIELLE HMA) ================= -->
+<section id="services" class="py-24 max-w-7xl mx-auto px-6">
+    <div class="text-center mb-14">
+        <span class="text-orange-500 text-sm font-mono tracking-wider">// NOS SPÉCIALITÉS</span>
+        <h2 class="text-4xl font-bold text-gray-900 mt-2 mb-4">Offre de soins <span class="text-accent">complète</span></h2>
+        <p class="text-gray-500 max-w-2xl mx-auto">Services médicaux et administratifs de l'Hôpital Militaire d'Abidjan.</p>
+    </div>
 
-        <div class="max-w-md mx-auto mb-10">
-            <div class="relative">
-                <i class="fas fa-search absolute left-4 top-1/2 -translate-y-1/2 text-gray-400"></i>
-                <input type="text" id="searchService" placeholder="Rechercher un service (cardiologie, pédiatrie...)" 
-                       class="w-full pl-11 pr-4 py-3 rounded-xl border border-gray-200 focus:outline-none focus:ring-2 focus:ring-orange-400">
-            </div>
+    <!-- Barre de recherche -->
+    <div class="max-w-md mx-auto mb-10">
+        <div class="relative">
+            <i class="fas fa-search absolute left-4 top-1/2 -translate-y-1/2 text-gray-400"></i>
+            <input type="text" id="searchService" placeholder="Rechercher un service (cardiologie, radiologie...)" 
+                   class="w-full pl-11 pr-4 py-3 rounded-xl border border-gray-200 focus:outline-none focus:ring-2 focus:ring-orange-400">
         </div>
+    </div>
 
-        <div class="grid grid-cols-2 md:grid-cols-4 gap-5" id="servicesGrid">
-            <div class="glass-card rounded-xl p-5 text-center service-item" data-name="médecine générale généraliste consultation bilan">
-                <div class="w-14 h-14 service-icon rounded-2xl flex items-center justify-center mx-auto mb-4"><i class="fas fa-stethoscope text-orange-500 text-2xl"></i></div>
-                <h4 class="font-bold text-gray-900">Médecine générale</h4>
-                <p class="text-xs text-gray-500 mt-1">Consultations & bilans</p>
-            </div>
-            <div class="glass-card rounded-xl p-5 text-center service-item" data-name="cardiologie cœur cardiaque exploration">
-                <div class="w-14 h-14 service-icon rounded-2xl flex items-center justify-center mx-auto mb-4"><i class="fas fa-heartbeat text-orange-500 text-2xl"></i></div>
-                <h4 class="font-bold text-gray-900">Cardiologie</h4>
-                <p class="text-xs text-gray-500 mt-1">Explorations cardiaques</p>
-            </div>
-            <div class="glass-card rounded-xl p-5 text-center service-item" data-name="neurologie nerfs cerveau neurologique">
-                <div class="w-14 h-14 service-icon rounded-2xl flex items-center justify-center mx-auto mb-4"><i class="fas fa-brain text-orange-500 text-2xl"></i></div>
-                <h4 class="font-bold text-gray-900">Neurologie</h4>
-                <p class="text-xs text-gray-500 mt-1">Pathologies nerveuses</p>
-            </div>
-            <div class="glass-card rounded-xl p-5 text-center service-item" data-name="chirurgie opération bloc">
-                <div class="w-14 h-14 service-icon rounded-2xl flex items-center justify-center mx-auto mb-4"><i class="fas fa-scalpel text-orange-500 text-2xl"></i></div>
-                <h4 class="font-bold text-gray-900">Chirurgie</h4>
-                <p class="text-xs text-gray-500 mt-1">Blocs ultramodernes</p>
-            </div>
-            <div class="glass-card rounded-xl p-5 text-center service-item" data-name="imagerie radiologie scanner irm échographie">
-                <div class="w-14 h-14 service-icon rounded-2xl flex items-center justify-center mx-auto mb-4"><i class="fas fa-x-ray text-orange-500 text-2xl"></i></div>
-                <h4 class="font-bold text-gray-900">Imagerie</h4>
-                <p class="text-xs text-gray-500 mt-1">IRM / Scanner 3T</p>
-            </div>
-            <div class="glass-card rounded-xl p-5 text-center service-item" data-name="laboratoire analyses bilans sang">
-                <div class="w-14 h-14 service-icon rounded-2xl flex items-center justify-center mx-auto mb-4"><i class="fas fa-microscope text-orange-500 text-2xl"></i></div>
-                <h4 class="font-bold text-gray-900">Laboratoire</h4>
-                <p class="text-xs text-gray-500 mt-1">Analyses haute précision</p>
-            </div>
-            <div class="glass-card rounded-xl p-5 text-center service-item" data-name="pneumologie poumons respiration">
-                <div class="w-14 h-14 service-icon rounded-2xl flex items-center justify-center mx-auto mb-4"><i class="fas fa-lungs text-orange-500 text-2xl"></i></div>
-                <h4 class="font-bold text-gray-900">Pneumologie</h4>
-                <p class="text-xs text-gray-500 mt-1">Soins respiratoires</p>
-            </div>
-            <div class="glass-card rounded-xl p-5 text-center service-item" data-name="gynécologie femme grossesse obstétrique">
-                <div class="w-14 h-14 service-icon rounded-2xl flex items-center justify-center mx-auto mb-4"><i class="fas fa-female text-orange-500 text-2xl"></i></div>
-                <h4 class="font-bold text-gray-900">Gynécologie</h4>
-                <p class="text-xs text-gray-500 mt-1">Suivi & obstétrique</p>
-            </div>
+    <!-- Grille des services (34 spécialités officielles) -->
+    <div class="grid grid-cols-2 md:grid-cols-4 gap-5" id="servicesGrid">
+        <!-- 1 -->
+        <div class="glass-card rounded-xl p-5 text-center service-item" data-name="administration gestion accueil">
+            <div class="w-14 h-14 service-icon rounded-2xl flex items-center justify-center mx-auto mb-4"><i class="fas fa-building text-orange-500 text-2xl"></i></div>
+            <h4 class="font-bold text-gray-900">ADMINISTRATION</h4>
+            <p class="text-xs text-gray-500 mt-1">Accueil & formalités</p>
         </div>
-        <div class="text-center mt-8"><p class="text-sm text-gray-400 font-mono">+ 30 autres spécialités • Pédiatrie • Ophtalmologie • ORL • Dermatologie • Néphrologie • Kinésithérapie • Oncologie</p></div>
-    </section>
-
+        <!-- 2 -->
+        <div class="glass-card rounded-xl p-5 text-center service-item" data-name="anesthésie réveil douleur bloc">
+            <div class="w-14 h-14 service-icon rounded-2xl flex items-center justify-center mx-auto mb-4"><i class="fas fa-syringe text-orange-500 text-2xl"></i></div>
+            <h4 class="font-bold text-gray-900">ANESTHESIE</h4>
+            <p class="text-xs text-gray-500 mt-1">Anesthésie générale & locale</p>
+        </div>
+        <!-- 3 -->
+        <div class="glass-card rounded-xl p-5 text-center service-item" data-name="cabinet dentaire soins dentaires">
+            <div class="w-14 h-14 service-icon rounded-2xl flex items-center justify-center mx-auto mb-4"><i class="fas fa-tooth text-orange-500 text-2xl"></i></div>
+            <h4 class="font-bold text-gray-900">CABINET DENTAIRE</h4>
+            <p class="text-xs text-gray-500 mt-1">Soins bucco-dentaires</p>
+        </div>
+        <!-- 4 -->
+        <div class="glass-card rounded-xl p-5 text-center service-item" data-name="cardiologie cœur">
+            <div class="w-14 h-14 service-icon rounded-2xl flex items-center justify-center mx-auto mb-4"><i class="fas fa-heartbeat text-orange-500 text-2xl"></i></div>
+            <h4 class="font-bold text-gray-900">CARDIOLOGIE</h4>
+            <p class="text-xs text-gray-500 mt-1">Explorations cardiaques</p>
+        </div>
+        <!-- 5 -->
+        <div class="glass-card rounded-xl p-5 text-center service-item" data-name="chirurgie digestive">
+            <div class="w-14 h-14 service-icon rounded-2xl flex items-center justify-center mx-auto mb-4"><i class="fas fa-stethoscope text-orange-500 text-2xl"></i></div>
+            <h4 class="font-bold text-gray-900">CHIRURGIE DIGESTIVE</h4>
+            <p class="text-xs text-gray-500 mt-1">Chirurgie de l'appareil digestif</p>
+        </div>
+        <!-- 6 -->
+        <div class="glass-card rounded-xl p-5 text-center service-item" data-name="chirurgie traumatologie">
+            <div class="w-14 h-14 service-icon rounded-2xl flex items-center justify-center mx-auto mb-4"><i class="fas fa-scalpel text-orange-500 text-2xl"></i></div>
+            <h4 class="font-bold text-gray-900">CHIRURGIE TRAUMATOLOGIE</h4>
+            <p class="text-xs text-gray-500 mt-1">Traumatismes & fractures</p>
+        </div>
+        <!-- 7 -->
+        <div class="glass-card rounded-xl p-5 text-center service-item" data-name="dermatologie peau">
+            <div class="w-14 h-14 service-icon rounded-2xl flex items-center justify-center mx-auto mb-4"><i class="fas fa-allergies text-orange-500 text-2xl"></i></div>
+            <h4 class="font-bold text-gray-900">DERMATOLOGIE</h4>
+            <p class="text-xs text-gray-500 mt-1">Affections cutanées</p>
+        </div>
+        <!-- 8 -->
+        <div class="glass-card rounded-xl p-5 text-center service-item" data-name="échographie imagerie">
+            <div class="w-14 h-14 service-icon rounded-2xl flex items-center justify-center mx-auto mb-4"><i class="fas fa-waveform text-orange-500 text-2xl"></i></div>
+            <h4 class="font-bold text-gray-900">ECHOGRAPHIE</h4>
+            <p class="text-xs text-gray-500 mt-1">Échographies diagnostiques</p>
+        </div>
+        <!-- 9 -->
+        <div class="glass-card rounded-xl p-5 text-center service-item" data-name="endoscopie digestive gastroscopie">
+            <div class="w-14 h-14 service-icon rounded-2xl flex items-center justify-center mx-auto mb-4"><i class="fas fa-microscope text-orange-500 text-2xl"></i></div>
+            <h4 class="font-bold text-gray-900">ENDOSCOPIE DIGESTIVE</h4>
+            <p class="text-xs text-gray-500 mt-1">Exploration interne</p>
+        </div>
+        <!-- 10 -->
+        <div class="glass-card rounded-xl p-5 text-center service-item" data-name="gynécologie obstétrique">
+            <div class="w-14 h-14 service-icon rounded-2xl flex items-center justify-center mx-auto mb-4"><i class="fas fa-female text-orange-500 text-2xl"></i></div>
+            <h4 class="font-bold text-gray-900">GYNECOLOGIE</h4>
+            <p class="text-xs text-gray-500 mt-1">Suivi féminin & obstétrique</p>
+        </div>
+        <!-- 11 -->
+        <div class="glass-card rounded-xl p-5 text-center service-item" data-name="laboratoire analyses">
+            <div class="w-14 h-14 service-icon rounded-2xl flex items-center justify-center mx-auto mb-4"><i class="fas fa-flask text-orange-500 text-2xl"></i></div>
+            <h4 class="font-bold text-gray-900">LABORATOIRE</h4>
+            <p class="text-xs text-gray-500 mt-1">Analyses de biologie médicale</p>
+        </div>
+        <!-- 12 -->
+        <div class="glass-card rounded-xl p-5 text-center service-item" data-name="mammographie sein">
+            <div class="w-14 h-14 service-icon rounded-2xl flex items-center justify-center mx-auto mb-4"><i class="fas fa-female text-orange-500 text-2xl"></i></div>
+            <h4 class="font-bold text-gray-900">MAMMOGRAPHIE</h4>
+            <p class="text-xs text-gray-500 mt-1">Dépistage cancer du sein</p>
+        </div>
+        <!-- 13 -->
+        <div class="glass-card rounded-xl p-5 text-center service-item" data-name="médecine interne polyvalent">
+            <div class="w-14 h-14 service-icon rounded-2xl flex items-center justify-center mx-auto mb-4"><i class="fas fa-user-md text-orange-500 text-2xl"></i></div>
+            <h4 class="font-bold text-gray-900">MEDECINE INTERNE</h4>
+            <p class="text-xs text-gray-500 mt-1">Diagnostic global</p>
+        </div>
+        <!-- 14 -->
+        <div class="glass-card rounded-xl p-5 text-center service-item" data-name="néphrologie rein">
+            <div class="w-14 h-14 service-icon rounded-2xl flex items-center justify-center mx-auto mb-4"><i class="fas fa-filter text-orange-500 text-2xl"></i></div>
+            <h4 class="font-bold text-gray-900">NEPHROLOGIE</h4>
+            <p class="text-xs text-gray-500 mt-1">Maladies rénales</p>
+        </div>
+        <!-- 15 -->
+        <div class="glass-card rounded-xl p-5 text-center service-item" data-name="orl oreille nez gorge">
+            <div class="w-14 h-14 service-icon rounded-2xl flex items-center justify-center mx-auto mb-4"><i class="fas fa-ear-deaf text-orange-500 text-2xl"></i></div>
+            <h4 class="font-bold text-gray-900">O.R.L</h4>
+            <p class="text-xs text-gray-500 mt-1">Oto-rhino-laryngologie</p>
+        </div>
+        <!-- 16 -->
+        <div class="glass-card rounded-xl p-5 text-center service-item" data-name="ophtalmologie vue">
+            <div class="w-14 h-14 service-icon rounded-2xl flex items-center justify-center mx-auto mb-4"><i class="fas fa-eye text-orange-500 text-2xl"></i></div>
+            <h4 class="font-bold text-gray-900">OPHTALMOLOGIE</h4>
+            <p class="text-xs text-gray-500 mt-1">Soins visuels</p>
+        </div>
+        <!-- 17 -->
+        <div class="glass-card rounded-xl p-5 text-center service-item" data-name="pédiatrie enfants">
+            <div class="w-14 h-14 service-icon rounded-2xl flex items-center justify-center mx-auto mb-4"><i class="fas fa-baby-carriage text-orange-500 text-2xl"></i></div>
+            <h4 class="font-bold text-gray-900">PEDIATRIE</h4>
+            <p class="text-xs text-gray-500 mt-1">Santé des enfants</p>
+        </div>
+        <!-- 18 -->
+        <div class="glass-card rounded-xl p-5 text-center service-item" data-name="pharmacie médicaments">
+            <div class="w-14 h-14 service-icon rounded-2xl flex items-center justify-center mx-auto mb-4"><i class="fas fa-capsules text-orange-500 text-2xl"></i></div>
+            <h4 class="font-bold text-gray-900">PHARMACIE</h4>
+            <p class="text-xs text-gray-500 mt-1">Délivrance de médicaments</p>
+        </div>
+        <!-- 19 -->
+        <div class="glass-card rounded-xl p-5 text-center service-item" data-name="psychiatrie santé mentale">
+            <div class="w-14 h-14 service-icon rounded-2xl flex items-center justify-center mx-auto mb-4"><i class="fas fa-head-side-brain text-orange-500 text-2xl"></i></div>
+            <h4 class="font-bold text-gray-900">PSYCHIATRIE</h4>
+            <p class="text-xs text-gray-500 mt-1">Santé mentale</p>
+        </div>
+        <!-- 20 -->
+        <div class="glass-card rounded-xl p-5 text-center service-item" data-name="radiologie radio">
+            <div class="w-14 h-14 service-icon rounded-2xl flex items-center justify-center mx-auto mb-4"><i class="fas fa-x-ray text-orange-500 text-2xl"></i></div>
+            <h4 class="font-bold text-gray-900">RADIOLOGIE</h4>
+            <p class="text-xs text-gray-500 mt-1">Imagerie conventionnelle</p>
+        </div>
+        <!-- 21 -->
+        <div class="glass-card rounded-xl p-5 text-center service-item" data-name="recouvrement facturation">
+            <div class="w-14 h-14 service-icon rounded-2xl flex items-center justify-center mx-auto mb-4"><i class="fas fa-coins text-orange-500 text-2xl"></i></div>
+            <h4 class="font-bold text-gray-900">RECOUVREMENT</h4>
+            <p class="text-xs text-gray-500 mt-1">Gestion administrative des paiements</p>
+        </div>
+        <!-- 22 -->
+        <div class="glass-card rounded-xl p-5 text-center service-item" data-name="scanner tomodensitométrie">
+            <div class="w-14 h-14 service-icon rounded-2xl flex items-center justify-center mx-auto mb-4"><i class="fas fa-cube text-orange-500 text-2xl"></i></div>
+            <h4 class="font-bold text-gray-900">SCANNER</h4>
+            <p class="text-xs text-gray-500 mt-1">Tomodensitométrie</p>
+        </div>
+        <!-- 23 -->
+        <div class="glass-card rounded-xl p-5 text-center service-item" data-name="stomatologie bouche">
+            <div class="w-14 h-14 service-icon rounded-2xl flex items-center justify-center mx-auto mb-4"><i class="fas fa-teeth-open text-orange-500 text-2xl"></i></div>
+            <h4 class="font-bold text-gray-900">STOMATOLOGIE</h4>
+            <p class="text-xs text-gray-500 mt-1">Chirurgie buccale</p>
+        </div>
+        <!-- 24 -->
+        <div class="glass-card rounded-xl p-5 text-center service-item" data-name="urgences chirurgie">
+            <div class="w-14 h-14 service-icon rounded-2xl flex items-center justify-center mx-auto mb-4"><i class="fas fa-truck-medical text-orange-500 text-2xl"></i></div>
+            <h4 class="font-bold text-gray-900">URGENCES CHIRURGIE</h4>
+            <p class="text-xs text-gray-500 mt-1">Urgences chirurgicales 24h/24</p>
+        </div>
+        <!-- 25 -->
+        <div class="glass-card rounded-xl p-5 text-center service-item" data-name="urgences médicales">
+            <div class="w-14 h-14 service-icon rounded-2xl flex items-center justify-center mx-auto mb-4"><i class="fas fa-ambulance text-orange-500 text-2xl"></i></div>
+            <h4 class="font-bold text-gray-900">URGENCES MEDICALES</h4>
+            <p class="text-xs text-gray-500 mt-1">Prise en charge immédiate</p>
+        </div>
+        <!-- 26 -->
+        <div class="glass-card rounded-xl p-5 text-center service-item" data-name="direction hma">
+            <div class="w-14 h-14 service-icon rounded-2xl flex items-center justify-center mx-auto mb-4"><i class="fas fa-chalkboard-user text-orange-500 text-2xl"></i></div>
+            <h4 class="font-bold text-gray-900">DIRECTION HMA</h4>
+            <p class="text-xs text-gray-500 mt-1">Direction de l'hôpital</p>
+        </div>
+        <!-- 27 -->
+        <div class="glass-card rounded-xl p-5 text-center service-item" data-name="radio radiographie">
+            <div class="w-14 h-14 service-icon rounded-2xl flex items-center justify-center mx-auto mb-4"><i class="fas fa-x-ray text-orange-500 text-2xl"></i></div>
+            <h4 class="font-bold text-gray-900">RADIO</h4>
+            <p class="text-xs text-gray-500 mt-1">Radiographie standard</p>
+        </div>
+        <!-- 28 -->
+        <div class="glass-card rounded-xl p-5 text-center service-item" data-name="chirurgie pédiatrie enfants">
+            <div class="w-14 h-14 service-icon rounded-2xl flex items-center justify-center mx-auto mb-4"><i class="fas fa-baby text-orange-500 text-2xl"></i></div>
+            <h4 class="font-bold text-gray-900">CHIRURGIE PEDIATRIE</h4>
+            <p class="text-xs text-gray-500 mt-1">Chirurgie infantile</p>
+        </div>
+        <!-- 29 -->
+        <div class="glass-card rounded-xl p-5 text-center service-item" data-name="neurochirurgie cerveau">
+            <div class="w-14 h-14 service-icon rounded-2xl flex items-center justify-center mx-auto mb-4"><i class="fas fa-brain text-orange-500 text-2xl"></i></div>
+            <h4 class="font-bold text-gray-900">NEUROCHIRURGIE</h4>
+            <p class="text-xs text-gray-500 mt-1">Chirurgie du système nerveux</p>
+        </div>
+        <!-- 30 -->
+        <div class="glass-card rounded-xl p-5 text-center service-item" data-name="diabétologie diabète sucre">
+            <div class="w-14 h-14 service-icon rounded-2xl flex items-center justify-center mx-auto mb-4"><i class="fas fa-droplet text-orange-500 text-2xl"></i></div>
+            <h4 class="font-bold text-gray-900">DIABETOLOGIE</h4>
+            <p class="text-xs text-gray-500 mt-1">Traitement du diabète</p>
+        </div>
+        <!-- 31 -->
+        <div class="glass-card rounded-xl p-5 text-center service-item" data-name="dépôt de sang transfusion">
+            <div class="w-14 h-14 service-icon rounded-2xl flex items-center justify-center mx-auto mb-4"><i class="fas fa-tint text-orange-500 text-2xl"></i></div>
+            <h4 class="font-bold text-gray-900">DEPOT DE SANG</h4>
+            <p class="text-xs text-gray-500 mt-1">Transfusion sanguine</p>
+        </div>
+        <!-- 32 -->
+        <div class="glass-card rounded-xl p-5 text-center service-item" data-name="oxygène oxygénothérapie">
+            <div class="w-14 h-14 service-icon rounded-2xl flex items-center justify-center mx-auto mb-4"><i class="fas fa-lungs text-orange-500 text-2xl"></i></div>
+            <h4 class="font-bold text-gray-900">OXYGENE</h4>
+            <p class="text-xs text-gray-500 mt-1">Oxygénothérapie</p>
+        </div>
+        <!-- 33 -->
+        <div class="glass-card rounded-xl p-5 text-center service-item" data-name="kinésithérapie rééducation">
+            <div class="w-14 h-14 service-icon rounded-2xl flex items-center justify-center mx-auto mb-4"><i class="fas fa-walking text-orange-500 text-2xl"></i></div>
+            <h4 class="font-bold text-gray-900">KINESITHERAPIE (MPR)</h4>
+            <p class="text-xs text-gray-500 mt-1">Médecine physique & réadaptation</p>
+        </div>
+    </div>
+    <div class="text-center mt-8">
+        <p class="text-sm text-gray-400 font-mono">Tous les services sont disponibles sur rendez-vous ou en urgence 24h/24.</p>
+    </div>
+</section>
     <!-- ================= SECTION ACTUALITÉS & ÉVÉNEMENTS ================= -->
     <section id="evenements" class="py-20 bg-gradient-to-b from-white to-orange-50/30">
         <div class="max-w-7xl mx-auto px-6">
