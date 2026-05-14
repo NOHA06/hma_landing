@@ -849,11 +849,14 @@ s0.parentNode.insertBefore(s1,s0);
         <i class="fas fa-map-marker-alt mr-2"></i> Hôpital Militaire d'Abidjan - Route du Zoo, Abobo
     </div>
     <div class="p-5">
-        <!-- Bouton principal Yango -->
-        <button id="yangoOpenBtn" 
-                class="w-full bg-gradient-to-r from-red-500 to-orange-500 text-white py-4 rounded-xl font-bold text-lg flex items-center justify-center gap-3 hover:shadow-lg transition">
+        <a id="yangoLink" 
+           href="#"
+           target="_blank"
+           class="w-full bg-gradient-to-r from-red-500 to-orange-500 text-white py-4 rounded-xl font-bold text-lg flex items-center justify-center gap-3 hover:shadow-lg transition">
             <i class="fas fa-taxi text-2xl"></i> Ouvrir dans Yango
-        </button>
+        </a>
+    </div>
+</div>
         
        
         
@@ -861,29 +864,8 @@ s0.parentNode.insertBefore(s1,s0);
     </div>
 </div>
 
-<script>
-    // Coordonnées GPS de l'Hôpital Militaire d'Abidjan (Abobo)
-    // À remplacer par les vraies coordonnées
-    const HMA_LAT = 5.345678;
-    const HMA_LNG = -4.012345;
-    
-    // Deep link pour Yandex/Yango
-    const YANGO_DEEP_LINK = `yandexmaps://maps.yandex.com/?ll=${HMA_LNG},${HMA_LAT}&z=16&pt=${HMA_LNG},${HMA_LAT}`;
-    const YANGO_WEB_FALLBACK = `https://yandex.com/maps/?ll=${HMA_LNG},${HMA_LAT}&z=16&pt=${HMA_LNG},${HMA_LAT}`;
-    
-    // Deep link alternatif pour Yango (version plus simple)
-    const YANGO_ALT_LINK = `yandexmaps://maps.yandex.com/?text=Hôpital%20Militaire%20d'Abidjan`;
-    
-    document.getElementById('yangoOpenBtn').addEventListener('click', function() {
-        // Essayer d'ouvrir l'application
-        window.location.href = YANGO_DEEP_LINK;
-        
-        // Si l'app n'est pas installée, ouvrir le site web après 800ms
-        setTimeout(function() {
-            window.location.href = YANGO_WEB_FALLBACK;
-        }, 800);
-    });
-</script>
+
+
                 </div>
 
                 <div>
@@ -1019,6 +1001,29 @@ s0.parentNode.insertBefore(s1,s0);
                 darkModeIcon.classList.add('fa-sun');
             }
         }
+
+
+
+
+
+        
+document.getElementById('yangoLink').addEventListener('click', function(e) {
+    e.preventDefault();
+    
+    // Coordonnées précises de l'Hôpital Militaire d'Abidjan (HMA)
+  
+    const lat = 5.3832785;
+    const lon = -4.0081946;
+    const label = encodeURIComponent("Hôpital Militaire d'Abidjan (HMA)");
+
+    // Cette URL force le point B (destination) sur la carte et dans l'app
+    const url = `https://yandex.com/maps/?rtext=~${lat},${lon}&rtt=taxi&text=${label}`;
+
+    window.location.href = url;
+});
+
+
+
     </script>
 </body>
 </html>
