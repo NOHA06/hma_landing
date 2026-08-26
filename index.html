@@ -1,108 +1,71 @@
 <!DOCTYPE html>
 <html lang="fr">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
-    <title>Espace réservé !!!</title>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
-    <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
-        
-        body {
-            min-height: 100vh;
-            background: white;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, sans-serif;
-        }
-        
-        .container {
-            text-align: center;
-            padding: 2rem;
-            max-width: 500px;
-        }
-        
-        .icon {
-            width: 80px;
-            height: 80px;
-            background: #f5f5f5;
-            border-radius: 20px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            margin: 0 auto 2rem;
-        }
-        
-        .icon i {
-            font-size: 40px;
-            color: #999;
-        }
-        
-        h1 {
-            font-size: 2rem;
-            font-weight: 500;
-            color: #333;
-            margin-bottom: 1rem;
-        }
-        
-        .badge {
-            display: inline-block;
-            background: #f0f0f0;
-            padding: 0.3rem 1rem;
-            border-radius: 50px;
-            font-size: 0.75rem;
-            color: #666;
-            margin-bottom: 2rem;
-        }
-        
-        p {
-            color: #888;
-            line-height: 1.6;
-            margin-bottom: 2rem;
-        }
-        
-        .divider {
-            width: 40px;
-            height: 2px;
-            background: #ddd;
-            margin: 2rem auto;
-        }
-        
-        .footer {
-            margin-top: 3rem;
-            font-size: 0.7rem;
-            color: #bbb;
-        }
-    </style>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
+    <title>Espace réservé — HMA</title>
+
+    <!-- Polices Google -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,500;0,600;1,500&family=Inter:wght@300;400;500&display=swap" rel="stylesheet" />
+
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" />
+
+    <!-- ===== FEUILLE DE STYLE EXTERNE ===== -->
+    <link rel="stylesheet" href="style.css" />
 </head>
 <body>
+
+    <!-- Éléments de fond flottants -->
+    <div class="bg-blur bg-blur--1"></div>
+    <div class="bg-blur bg-blur--2"></div>
+
     <div class="container">
-        <div class="icon">
-            <i class="fas fa-lock"></i>
+        <!-- LOGO -->
+        <div class="logo-wrapper">
+            <img src="./HMA1.png" alt="Logo HMA" class="logo" id="logo" />
         </div>
-        
-        <h1>Espace réservé</h1>
-        
-        <div class="badge">
-            <i class="fas fa-code"></i> Site en construction
+
+        <!-- TITRE -->
+        <h1 id="title">Espace réservé</h1>
+
+        <!-- BADGE -->
+        <div class="badge" id="badge">
+            <i class="fas fa-code"></i> <span id="badgeText">En développement</span>
         </div>
-        
-        <p>
-            Cette page est actuellement en cours de développement.<br>
-            Nous revenons très bientôt.
+
+        <!-- DESCRIPTION -->
+        <p id="description">
+            Une nouvelle expérience se prépare.<br />
+            Nous vous dévoilons très prochainement ce projet unique.
         </p>
-        
-        <div class="divider"></div>
-        
+
+        <!-- SÉPARATEUR AVEC DIAMANT -->
+        <div class="divider">
+            <span class="divider-line"></span>
+            <span class="divider-diamond"><i class="fas fa-gem"></i></span>
+            <span class="divider-line"></span>
+        </div>
+
+        <!-- HORLOGE (AJOUT JS) -->
+        <div class="clock" id="clock">
+            <i class="far fa-clock"></i> <span id="timeDisplay">--:--:--</span>
+        </div>
+
+        <!-- COMPTEUR DE VISITES (AJOUT JS) -->
+        <div class="visitor-counter" id="visitorCounter">
+            <i class="fas fa-eye"></i> <span id="visitorCount">0</span> visiteurs
+        </div>
+
+        <!-- FOOTER -->
         <div class="footer">
-            &copy; 2025 — Tous droits réservés
+            &copy; 2025 — <span class="highlight">HMA</span> — Tous droits réservés
         </div>
     </div>
+
+    <!-- ===== SCRIPT JS EXTERNE ===== -->
+    <script src="script.js" defer></script>
 </body>
 </html>
-

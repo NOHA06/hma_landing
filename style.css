@@ -1,0 +1,318 @@
+/* =======================================================
+   RESET & BASE
+   ======================================================= */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-family: 'Inter', sans-serif;
+    background-color: #fcf9f5;
+    padding: 1.5rem;
+    position: relative;
+    overflow-x: hidden;
+}
+
+/* =======================================================
+   ÉLÉMENTS DE FOND FLOTTANTS
+   ======================================================= */
+.bg-blur {
+    position: fixed;
+    border-radius: 50%;
+    filter: blur(120px);
+    pointer-events: none;
+    z-index: 0;
+    animation: floatBg 16s ease-in-out infinite alternate;
+}
+
+.bg-blur--1 {
+    width: 500px;
+    height: 500px;
+    top: -15%;
+    left: -10%;
+    background: radial-gradient(circle, rgba(232, 93, 4, 0.15), transparent 70%);
+}
+
+.bg-blur--2 {
+    width: 600px;
+    height: 600px;
+    bottom: -20%;
+    right: -10%;
+    background: radial-gradient(circle, rgba(45, 106, 79, 0.12), transparent 70%);
+    animation-duration: 20s;
+    animation-delay: -4s;
+}
+
+@keyframes floatBg {
+    0% { transform: translate(0, 0) scale(1); }
+    100% { transform: translate(40px, -30px) scale(1.15); }
+}
+
+/* =======================================================
+   CARTE PRINCIPALE
+   ======================================================= */
+.container {
+    position: relative;
+    z-index: 1;
+    max-width: 560px;
+    width: 100%;
+    padding: 3rem 2.8rem;
+    background: rgba(255, 255, 255, 0.72);
+    backdrop-filter: blur(24px);
+    -webkit-backdrop-filter: blur(24px);
+    border-radius: 48px;
+    text-align: center;
+    border: 1px solid rgba(255, 255, 255, 0.8);
+    box-shadow: 
+        0 40px 100px rgba(0, 0, 0, 0.04),
+        0 12px 32px rgba(0, 0, 0, 0.02),
+        inset 0 1px 0 rgba(255, 255, 255, 0.9);
+    animation: fadeSlide 1s cubic-bezier(0.23, 1, 0.32, 1) both;
+    transition: transform 0.5s cubic-bezier(0.34, 1.56, 0.64, 1), 
+                box-shadow 0.5s ease;
+}
+
+.container:hover {
+    transform: translateY(-6px);
+    box-shadow: 0 60px 120px rgba(232, 93, 4, 0.06), 
+                0 20px 40px rgba(0, 0, 0, 0.02);
+}
+
+@keyframes fadeSlide {
+    0% { opacity: 0; transform: scale(0.96) translateY(30px); }
+    100% { opacity: 1; transform: scale(1) translateY(0); }
+}
+
+/* =======================================================
+   LOGO
+   ======================================================= */
+.logo-wrapper {
+    margin-bottom: 2rem;
+    display: flex;
+    justify-content: center;
+}
+
+.logo {
+    max-width: 90px;
+    height: auto;
+    filter: drop-shadow(0 8px 24px rgba(232, 93, 4, 0.12));
+    transition: transform 0.4s cubic-bezier(0.34, 1.56, 0.64, 1), 
+                filter 0.4s ease;
+}
+
+.container:hover .logo {
+    transform: scale(1.04) rotate(-1deg);
+    filter: drop-shadow(0 12px 32px rgba(232, 93, 4, 0.20));
+}
+
+/* =======================================================
+   TITRE
+   ======================================================= */
+h1 {
+    font-family: 'Playfair Display', serif;
+    font-weight: 600;
+    font-size: 2.8rem;
+    color: #1a2e2a;
+    letter-spacing: -0.02em;
+    margin-bottom: 1rem;
+    background: linear-gradient(135deg, #1a2e2a 0%, #2d6a4f 80%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+}
+
+/* =======================================================
+   BADGE
+   ======================================================= */
+.badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    background: rgba(232, 93, 4, 0.08);
+    padding: 0.5rem 1.5rem 0.5rem 1.2rem;
+    border-radius: 60px;
+    font-size: 0.8rem;
+    font-weight: 500;
+    color: #d95a11;
+    border: 1px solid rgba(232, 93, 4, 0.15);
+    backdrop-filter: blur(4px);
+    margin-bottom: 2rem;
+    letter-spacing: 0.03em;
+    transition: all 0.4s ease;
+    animation: badgePulse 3s ease-in-out infinite;
+}
+
+.badge i {
+    font-size: 0.7rem;
+    color: #e85d04;
+}
+
+.badge:hover {
+    background: rgba(232, 93, 4, 0.14);
+    transform: scale(1.03);
+    border-color: rgba(232, 93, 4, 0.3);
+}
+
+@keyframes badgePulse {
+    0% { box-shadow: 0 0 0 0 rgba(232, 93, 4, 0.08); }
+    50% { box-shadow: 0 0 0 12px rgba(232, 93, 4, 0.0); }
+    100% { box-shadow: 0 0 0 0 rgba(232, 93, 4, 0.08); }
+}
+
+/* =======================================================
+   PARAGRAPHE
+   ======================================================= */
+p {
+    font-weight: 300;
+    font-size: 1.05rem;
+    color: #4d5f5a;
+    line-height: 1.7;
+    max-width: 340px;
+    margin: 0 auto 2.2rem;
+    letter-spacing: 0.01em;
+}
+
+/* =======================================================
+   SÉPARATEUR
+   ======================================================= */
+.divider {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 1rem;
+    margin: 2rem auto 2.4rem;
+    width: 100%;
+    max-width: 240px;
+}
+
+.divider-line {
+    flex: 1;
+    height: 1px;
+    background: linear-gradient(90deg, transparent, rgba(45, 106, 79, 0.25), transparent);
+}
+
+.divider-diamond {
+    color: #e85d04;
+    font-size: 0.8rem;
+    opacity: 0.6;
+    transition: all 0.4s ease;
+}
+
+.container:hover .divider-diamond {
+    transform: rotate(90deg);
+    opacity: 1;
+    color: #d95a11;
+}
+
+/* =======================================================
+   HORLOGE (AJOUT JS)
+   ======================================================= */
+.clock {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.6rem;
+    font-size: 0.85rem;
+    color: #5a6f68;
+    margin-bottom: 1rem;
+    font-weight: 400;
+    letter-spacing: 0.04em;
+    background: rgba(45, 106, 79, 0.04);
+    padding: 0.4rem 1.2rem;
+    border-radius: 40px;
+    border: 1px solid rgba(45, 106, 79, 0.06);
+    width: fit-content;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.clock i {
+    color: #e85d04;
+    font-size: 0.9rem;
+}
+
+/* =======================================================
+   COMPTEUR DE VISITES (AJOUT JS)
+   ======================================================= */
+.visitor-counter {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.6rem;
+    font-size: 0.75rem;
+    color: #8fa39b;
+    margin-bottom: 1.5rem;
+    font-weight: 300;
+}
+
+.visitor-counter i {
+    color: #2d6a4f;
+    font-size: 0.8rem;
+}
+
+.visitor-counter span {
+    font-weight: 500;
+    color: #1a2e2a;
+}
+
+/* =======================================================
+   FOOTER
+   ======================================================= */
+.footer {
+    font-size: 0.7rem;
+    font-weight: 400;
+    color: #a6b6b0;
+    letter-spacing: 0.04em;
+    margin-top: 1rem;
+    transition: color 0.3s ease;
+}
+
+.footer .highlight {
+    color: #2d6a4f;
+    font-weight: 500;
+    transition: color 0.3s ease;
+}
+
+.footer:hover .highlight {
+    color: #e85d04;
+}
+
+/* =======================================================
+   RESPONSIVE
+   ======================================================= */
+@media (max-width: 480px) {
+    .container {
+        padding: 2rem 1.5rem;
+        border-radius: 32px;
+    }
+
+    h1 {
+        font-size: 2.2rem;
+    }
+
+    .logo {
+        max-width: 70px;
+    }
+
+    p {
+        font-size: 0.95rem;
+    }
+
+    .bg-blur--1,
+    .bg-blur--2 {
+        width: 300px;
+        height: 300px;
+        filter: blur(80px);
+    }
+
+    .clock {
+        font-size: 0.75rem;
+        padding: 0.3rem 1rem;
+    }
+}
